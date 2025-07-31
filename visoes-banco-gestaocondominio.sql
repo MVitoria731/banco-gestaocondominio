@@ -75,5 +75,13 @@ WHERE u.id_unidade NOT IN(
 	FROM Morador_Unidade
 	WHERE data_saida IS NULL
 )
+
+--listar todos os moradores
+CREATE VIEW Moradores AS
+SELECT p.nome, p.email, u.bloco, u.numero_apartamento, mu.data_entrada, mu.data_saida
+FROM Morador m
+JOIN Pessoa p ON m.cpf_morador = p.cpf
+JOIN Morador_Unidade mu ON m.cpf_morador = mu.cpf_morador
+JOIN Unidade u ON mu.id_unidade = u.id_unidade;
 ORDER BY u.bloco, u.numero_apartamento
 
